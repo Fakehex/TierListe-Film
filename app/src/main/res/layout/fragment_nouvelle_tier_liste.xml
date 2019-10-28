@@ -6,29 +6,25 @@
     tools:context=".Controllers.Fragments.NouvelleTierListeFragment">
     <EditText
         android:id="@+id/titre_nouvelle_tier_liste"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Titre de la tier liste"/>
     <Button
-        android:id="@+id/rang_s_nouvelle_tier_liste"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_rang_s"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
         android:text="Selectionner un Rang S"
-        android:textColor="#FFF"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:layout_below="@id/titre_nouvelle_tier_liste"
         />
 
     <Button
-        android:id="@+id/rang_trash_nouvelle_tier_liste"
-        android:layout_width="wrap_content"
+        android:id="@+id/button_rang_trash"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00000000"
         android:text="Selectionner un Rang Trash"
-        android:textColor="#FFF"
-        android:textSize="30sp"
-        android:layout_below="@id/rang_s_nouvelle_tier_liste"
+        android:textSize="20sp"
+        android:layout_below="@id/button_rang_s"
         />
 
 </RelativeLayout>

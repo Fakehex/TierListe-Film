@@ -1,4 +1,4 @@
-package com.example.tierliste3.Controllers;
+package com.example.tierliste3.Models;
 
 import android.content.Context;
 import android.database.DatabaseErrorHandler;

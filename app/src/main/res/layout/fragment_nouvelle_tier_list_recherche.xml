@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Controllers.Fragments.NouvelleTierListRecherche">
+    <TextView
+        android:id="@+id/infoRecherche"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Nous allons chercher les maitres étalons"
+
+        />
+    <EditText
+        android:id="@+id/textRecherche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/recherche_film"
+        />
+    <Button
+        android:id="@+id/buttonRecherche"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rechercher"
+        android:textSize="20sp"
+        android:enabled="false"
+        android:layout_below="@id/textRecherche"
+        />
+
+</RelativeLayout>
