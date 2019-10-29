@@ -5,21 +5,25 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListeTiersListe {
 
-    ArrayList<TiersListe> sListeTiers;
+
 
     //Base de donnée: COntexte d el'app
 
     Context appContexte;
     ListesDBOpenHelper dbHelper;
+    public static final List<TiersListe> ITEMS = new ArrayList<TiersListe>();
+    ArrayList<TiersListe> sListeTiers;
 
     /**
      * Créé une liste et la charge depuis la BDD localesi besoin
      * @param ctx contexte de l'app
      */
     public ListeTiersListe(Context ctx) {
+
 
         sListeTiers = new ArrayList<>();
         appContexte = ctx.getApplicationContext();
