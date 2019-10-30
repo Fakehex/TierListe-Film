@@ -20,4 +20,12 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, NouvelleTierListeActivity.class);
         startActivity(intent);
     }
+
+    //lance une nouvelle activity pour crée une liste
+    public void consulterFilms(View view){
+        Intent intent = new Intent(this, ConsulterActivity.class);
+        startActivity(intent);
+    }
+
+
 }

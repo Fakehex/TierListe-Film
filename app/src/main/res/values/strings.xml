@@ -6,4 +6,6 @@
     <string name="rechercher">Rechercher</string>
     <string name="recherche_film">Recherche film</string>
     <string name="recherche">Recherche</string>
+    <string name="description">Film</string>
+
 </resources>
