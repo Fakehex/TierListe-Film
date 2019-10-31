@@ -1,6 +1,7 @@
 package com.example.tierliste3.Controllers.Activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,9 +37,11 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     public static final float POSTER_ASPECT_RATIO = 1.5f;
     public static final String MOVIE_BASE_URL="https://image.tmdb.org/t/p/w185";
 
-    public FilmAdapter(Context context, ArrayList<Film> movieList) {
+    public FilmAdapter(Context context, ArrayList<Film> movieList, OnItemClickListener mItemClickListener) {
         this.mContext = context;
         this.list = movieList;
+        this.mOnItemClickListener = mItemClickListener;
+
     }
     @NonNull
     @Override
@@ -93,7 +96,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
                             @Override
                             public void onError(Exception e) {
                                 Log.i("MOVIEADAPTER","--------- "+e.getMessage()+" ----------\n");
-
                                 holder.mMovietitle.setVisibility(View.VISIBLE);
                             }
                         }

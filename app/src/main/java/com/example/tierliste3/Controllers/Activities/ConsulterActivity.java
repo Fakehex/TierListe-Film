@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ConsulterActivity extends AppCompatActivity {
+public class ConsulterActivity extends AppCompatActivity implements FilmAdapter.OnItemClickListener{
     private static final String TAG = "ConsulterActivity";
 
     String myApiKey = "f98de7b132d6ea35fc6ffe4fbecba252";
@@ -46,11 +47,10 @@ public class ConsulterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_consulter);
         ButterKnife.bind(this);
         mProgressBar.setVisibility(View.INVISIBLE);
-        Log.i(TAG, "OnCreate ----------------------\n OnCreate--------------------\n");
         //Define recyclerView Layout
         movie_grid_recyclerView.setLayoutManager(new GridLayoutManager(this, getResources()
                 .getInteger(R.integer.number_of_grid_columns)));
-        mAdapter = new FilmAdapter(this, new ArrayList<Film>());
+        mAdapter = new FilmAdapter(this, new ArrayList<Film>(), ConsulterActivity.this);
         movie_grid_recyclerView.setAdapter(mAdapter);
         new FetchMovies().execute();
     }
@@ -66,9 +66,6 @@ public class ConsulterActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             mProgressBar.setVisibility(View.VISIBLE);
-            Log.i(TAG, "OnpreExecute----------------\n ----------------\n FetchMovies");
-
-
         }
 
 
@@ -99,10 +96,16 @@ public class ConsulterActivity extends AppCompatActivity {
         protected void onPostExecute(Void  s) {
             super.onPostExecute(s);
             mProgressBar.setVisibility(View.INVISIBLE);
-            mAdapter = new FilmAdapter(ConsulterActivity.this,new ArrayList<Film>());
+            mAdapter = new FilmAdapter(ConsulterActivity.this,new ArrayList<Film>(), ConsulterActivity.this);
             mAdapter.add(mPopularList);
             movie_grid_recyclerView.setAdapter(mAdapter);
         }
 
     }
+    public void send_details(Film movie, int position) {
+            Intent intent = new Intent(this, FilmDetailActivity.class);
+            intent.putExtra("detail", movie);
+            startActivity(intent);
+        }
 }
+
