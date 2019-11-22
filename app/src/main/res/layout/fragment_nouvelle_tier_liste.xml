@@ -9,14 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Titre de la tier liste"/>
+
     <Button
-        android:id="@+id/button_rang_s"
+        android:id="@+id/button_cree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Selectionner un Rang S"
-        android:textSize="20sp"
         android:layout_below="@id/titre_nouvelle_tier_liste"
-        />
+        android:onClick="creationTierListe"
+        android:text="Créer la tier liste"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/button_rang_trash"
@@ -24,7 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Selectionner un Rang Trash"
         android:textSize="20sp"
-        android:layout_below="@id/button_rang_s"
+        android:layout_below="@id/button_cree"
         />
 
 </RelativeLayout>

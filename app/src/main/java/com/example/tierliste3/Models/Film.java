@@ -104,7 +104,7 @@ public class Film implements Serializable {
             }
 
         }
-        return null; //Use Picasso to put placeholder for poster
+        return null;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.tierliste3.Controllers.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,9 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.tierliste3.Controllers.Activities.MainActivity;
+import com.example.tierliste3.Controllers.Activities.NouvelleTierListeActivity;
+import com.example.tierliste3.Controllers.Activities.TierListeActivity;
+import com.example.tierliste3.Models.Film;
 import com.example.tierliste3.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,17 +44,22 @@ public class NouvelleTierListeFragment extends Fragment {
 
         if(retView!=null)
         {
-            // Button recherche rang S
-            Button rangSButton = (Button)retView.findViewById(R.id.button_rang_s);
+            // Button cree tier liste
+            Button rangSButton = (Button)retView.findViewById(R.id.button_cree);
             rangSButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    FragmentManager fragmentManager = fragmentBelongActivity.getSupportFragmentManager();
-                    Fragment rechercheFragment = fragmentManager.findFragmentById(R.id.fragmentRecherche);
-                    final TextView rightFragmentTextView = (TextView)rechercheFragment.getView().findViewById(R.id.infoRecherche);
-                    rightFragmentTextView.setText("Recherche Rang S");
-                    Button buttonRecherche = (Button)rechercheFragment.getView().findViewById(R.id.buttonRecherche);
-                    buttonRecherche.setEnabled(true);
+                    Intent intent = new Intent(getActivity() , TierListeActivity.class);
+                    EditText editText = (EditText) retView.findViewById(R.id.titre_nouvelle_tier_liste);
+                    String titre = editText.getText().toString();
+                    NouvelleTierListeActivity activity = (NouvelleTierListeActivity) getActivity();
+                    intent.putExtra("mPopularList", activity.getmPopularList());
+                    intent.putExtra("tierF", new ArrayList<Film>());
+                    intent.putExtra("tierS", new ArrayList<Film>());
+                    intent.putExtra("titre", titre);
+                    intent.putExtra("activity","NouvelleTierListe");
+                    intent.putExtra("tiersListeHashMap",activity.getTiersListeHashMap());
+                    startActivity(intent);
                 }
             });
             // Button recherche rang trash

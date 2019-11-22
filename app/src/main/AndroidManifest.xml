@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Controllers.Activities.FilmDetailActivity"></activity>
+        <activity android:name=".Controllers.Activities.MesListesActivity"></activity>
+        <activity android:name=".Controllers.Activities.TierListeActivity" />
+        <activity android:name=".Controllers.Activities.FilmDetailActivity" />
         <activity android:name=".Controllers.Activities.ConsulterActivity" />
         <activity android:name=".Controllers.Activities.ListeTiersActivity" />
         <activity android:name=".Controllers.Activities.NouvelleTierListeActivity" />

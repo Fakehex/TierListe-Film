@@ -35,7 +35,7 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
         void send_details(Film movie, int position);
     }
     public static final float POSTER_ASPECT_RATIO = 1.5f;
-    public static final String MOVIE_BASE_URL="https://image.tmdb.org/t/p/w185";
+   // public static final String MOVIE_BASE_URL="https://image.tmdb.org/t/p/w185";
 
     public FilmAdapter(Context context, ArrayList<Film> movieList, OnItemClickListener mItemClickListener) {
         this.mContext = context;
@@ -47,10 +47,8 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
     @Override
     public FilmViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context parentContext = parent.getContext();
-        int layoutForMovieItem = R.layout.movie_item;
         LayoutInflater inflater = LayoutInflater.from(parentContext);
-        boolean shouldAttachToParentImmediately = false;
-        View view = inflater.inflate(R.layout.movie_item, parent, shouldAttachToParentImmediately);
+        View view = inflater.inflate(R.layout.movie_item, parent, false);
         final Context context = view.getContext();
 
         int gridColsNumber = context.getResources()
@@ -73,8 +71,6 @@ public class FilmAdapter extends RecyclerView.Adapter<FilmAdapter.FilmViewHolder
 
         String posterUrl = movie.getPosterPath();
 
-        // Warning: onError() will not be called, if url is null.
-        // Empty url leads to app crash.
         if (posterUrl == null) {
             holder.mMovietitle.setVisibility(View.VISIBLE);
         }
