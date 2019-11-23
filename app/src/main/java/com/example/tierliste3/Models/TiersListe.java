@@ -9,6 +9,9 @@ public class TiersListe implements Serializable {
 
     private ArrayList<Film> base;
     private ArrayList<Film> tierS;
+    private ArrayList<Film> tierA;
+    private ArrayList<Film> tierB;
+    private ArrayList<Film> tierC;
     private ArrayList<Film> tierF;
 
     public TiersListe(String titre,ArrayList<Film> base,ArrayList<Film> tierS, ArrayList<Film> tierF){
@@ -51,6 +54,15 @@ public class TiersListe implements Serializable {
         this.titre = t;
     }
 
+    public ArrayList<Film> getTierA() {
+        return tierA;
+    }
 
+    public ArrayList<Film> getTierB() {
+        return tierB;
+    }
 
+    public ArrayList<Film> getTierC() {
+        return tierC;
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.tierliste3.Controllers.Activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,6 +32,8 @@ public class ConsulterActivity extends AppCompatActivity implements FilmAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulter);
         ButterKnife.bind(this);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         Intent intent = getIntent();
         mPopularList = (ArrayList<Film>) intent.getSerializableExtra("mPopularList");

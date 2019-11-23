@@ -62,19 +62,7 @@ public class NouvelleTierListeFragment extends Fragment {
                     startActivity(intent);
                 }
             });
-            // Button recherche rang trash
-            Button rangTrashButton = (Button)retView.findViewById(R.id.button_rang_trash);
-            rangTrashButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    FragmentManager fragmentManager = fragmentBelongActivity.getSupportFragmentManager();
-                    Fragment rechercheFragment = fragmentManager.findFragmentById(R.id.fragmentRecherche);
-                    final TextView rightFragmentTextView = (TextView)rechercheFragment.getView().findViewById(R.id.infoRecherche);
-                    rightFragmentTextView.setText("Recherche Rang Trash");
-                    Button buttonRecherche = (Button)rechercheFragment.getView().findViewById(R.id.buttonRecherche);
-                    buttonRecherche.setEnabled(true);
-                }
-            });
+
         }
 
         return retView;

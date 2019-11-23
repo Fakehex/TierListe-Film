@@ -1,5 +1,6 @@
 package com.example.tierliste3.Controllers.Activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,6 +19,8 @@ public class FilmDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_detail);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         Intent intent = getIntent();
         Film film_intent = (Film) intent.getSerializableExtra("detail");
         ImageDetailFragment fragmentImage = (ImageDetailFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_backdrop);

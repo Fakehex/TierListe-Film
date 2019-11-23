@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ public class TierListeActivity extends AppCompatActivity {
 
     ArrayList<Film> mPopularList;
     ArrayList<Film> tierS;
+    ArrayList<Film> tierA;
+    ArrayList<Film> tierB;
+    ArrayList<Film> tierC;
     ArrayList<Film> tierF;
 
     @BindView(R.id.scrollview_1)
@@ -58,6 +62,9 @@ public class TierListeActivity extends AppCompatActivity {
         mPopularList = (ArrayList<Film>) intent.getSerializableExtra("mPopularList");
         tierF = (ArrayList<Film>) intent.getSerializableExtra("tierF");
         tierS = (ArrayList<Film>) intent.getSerializableExtra("tierS");
+        tierA = (ArrayList<Film>) intent.getSerializableExtra("tierA");
+        tierB = (ArrayList<Film>) intent.getSerializableExtra("tierB");
+        tierC = (ArrayList<Film>) intent.getSerializableExtra("tierC");
         tiersListeList = ( ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList") ;
         titre = (String) intent.getSerializableExtra("titre");
 
@@ -278,8 +285,10 @@ public class TierListeActivity extends AppCompatActivity {
             tiersListeList = new ArrayList<TiersListe>();
         }
         for(TiersListe elem : tiersListeList){
-            if(elem.getTitre() == tierListe.getTitre()){
+
+            if(elem.getTitre().equals(titre)){
                 tiersListeList.remove(elem);
+                break;
             }
         }
         tiersListeList.add(tierListe);

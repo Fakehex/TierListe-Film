@@ -35,7 +35,7 @@ public class MesListesActivity extends AppCompatActivity implements TierListeAda
 
         Intent intent = getIntent();
         tiersListeList = (ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList");
-
+        setTitle("Mes Tier Listes");
         recyclerView = (RecyclerView) findViewById(R.id.meslistes_recycler_view);
 
         // use this setting to improve performance if you know that changes

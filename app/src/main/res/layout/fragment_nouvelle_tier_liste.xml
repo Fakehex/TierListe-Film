@@ -4,28 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Controllers.Fragments.NouvelleTierListeFragment">
+
     <EditText
         android:id="@+id/titre_nouvelle_tier_liste"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Titre de la tier liste"/>
+        android:textSize="40dp"
+        android:hint="Titre de la tier liste" />
 
     <Button
         android:id="@+id/button_cree"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/titre_nouvelle_tier_liste"
-        android:onClick="creationTierListe"
+        android:layout_marginTop="46dp"
+
+        android:background="@drawable/buttonshape"
+        android:shadowColor="#DB0000"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="5"
         android:text="Créer la tier liste"
+        android:textColor="#FFFFFF"
         android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/button_rang_trash"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Selectionner un Rang Trash"
-        android:textSize="20sp"
-        android:layout_below="@id/button_cree"
-        />
 
 </RelativeLayout>

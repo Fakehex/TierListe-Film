@@ -1,5 +1,6 @@
 package com.example.tierliste3.Controllers.Activities;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -27,6 +28,7 @@ public class NouvelleTierListeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
+        setTitle("Nouvelle Tier Liste");
         mPopularList = (ArrayList<Film>) intent.getSerializableExtra("mPopularList");
         tiersListeList = (ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList");
         setContentView(R.layout.activity_nouvelle_tier_liste);
