@@ -45,7 +45,7 @@ public class NouvelleTierListeActivity extends AppCompatActivity {
     public ArrayList<Film> getmPopularList() {
         return mPopularList;
     }
-    public ArrayList<TiersListe> getTiersListeHashMap() {
+    public ArrayList<TiersListe> getTiersListeList() {
         return tiersListeList;
     }
 

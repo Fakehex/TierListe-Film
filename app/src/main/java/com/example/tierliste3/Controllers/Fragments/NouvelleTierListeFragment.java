@@ -58,7 +58,7 @@ public class NouvelleTierListeFragment extends Fragment {
                     intent.putExtra("tierS", new ArrayList<Film>());
                     intent.putExtra("titre", titre);
                     intent.putExtra("activity","NouvelleTierListe");
-                    intent.putExtra("tiersListeHashMap",activity.getTiersListeHashMap());
+                    intent.putExtra("tiersListeList",activity.getTiersListeList());
                     startActivity(intent);
                 }
             });

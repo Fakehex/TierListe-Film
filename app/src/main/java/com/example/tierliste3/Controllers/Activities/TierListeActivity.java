@@ -59,7 +59,6 @@ public class TierListeActivity extends AppCompatActivity {
         tierF = (ArrayList<Film>) intent.getSerializableExtra("tierF");
         tierS = (ArrayList<Film>) intent.getSerializableExtra("tierS");
         tiersListeList = ( ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList") ;
-
         titre = (String) intent.getSerializableExtra("titre");
 
         setTitle(titre);
@@ -163,6 +162,25 @@ public class TierListeActivity extends AppCompatActivity {
         });
         linearLayout_2.addView(button);
 
+        for(Film film : tierS){
+            button = new Button(this);
+            button.setText(film.getOriginalTitle());
+            button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    selectedFilm = film;
+                    selectedLinearLayout = linearLayout_2;
+                    selectedView = v;
+                    selectedTier = "tierS";
+
+                }
+            });
+            linearLayout_2.addView(button);
+        }
+
 
         if (linearLayout1 != null) {
             linearLayout1.addView(scrollView_2);
@@ -228,6 +246,24 @@ public class TierListeActivity extends AppCompatActivity {
         });
         linearLayout_3.addView(button);
 
+        for(Film film : tierF){
+            button = new Button(this);
+            button.setText(film.getOriginalTitle());
+            button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    selectedFilm = film;
+                    selectedLinearLayout = linearLayout_3;
+                    selectedView = v;
+                    selectedTier = "tierS";
+
+                }
+            });
+            linearLayout_3.addView(button);
+        }
 
         if (linearLayout1 != null) {
             linearLayout1.addView(scrollView_2);
@@ -240,6 +276,11 @@ public class TierListeActivity extends AppCompatActivity {
         TiersListe tierListe = new TiersListe(titre,mPopularList,tierS,tierF);
         if(tiersListeList == null){
             tiersListeList = new ArrayList<TiersListe>();
+        }
+        for(TiersListe elem : tiersListeList){
+            if(elem.getTitre() == tierListe.getTitre()){
+                tiersListeList.remove(elem);
+            }
         }
         tiersListeList.add(tierListe);
 

@@ -9,7 +9,9 @@
         android:id="@+id/tierliste_titre"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="top"
+        android:gravity="center"
+        android:textSize="@dimen/textSize_liste"
+        android:background="@drawable/back"
         />
 
 </FrameLayout>

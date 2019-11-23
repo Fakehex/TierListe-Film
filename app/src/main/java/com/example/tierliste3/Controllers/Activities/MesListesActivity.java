@@ -19,7 +19,7 @@ import com.example.tierliste3.R;
 
 import java.util.ArrayList;
 
-public class MesListesActivity extends AppCompatActivity {
+public class MesListesActivity extends AppCompatActivity implements TierListeAdapter.OnItemClickListener{
 
 
     private RecyclerView recyclerView;
@@ -36,39 +36,31 @@ public class MesListesActivity extends AppCompatActivity {
         Intent intent = getIntent();
         tiersListeList = (ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList");
 
-        //ScrollView 1
-        ScrollView scrollView = new ScrollView(this);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        scrollView.setLayoutParams(layoutParams);
+        recyclerView = (RecyclerView) findViewById(R.id.meslistes_recycler_view);
 
-        LinearLayout linearLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setLayoutParams(linearParams);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
 
-        scrollView.addView(linearLayout);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
-        Button button;
-        if(tiersListeList != null) {
-            for (TiersListe elem : tiersListeList) {
-                button = new Button(this);
-                button.setText(elem.getTitre());
-                button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                    }
-                });
-                linearLayout.addView(button);
-            }
-        }
-
-        LinearLayout linearLayout1 = findViewById(R.id.rootContainerMesListes);
-        if (linearLayout1 != null) {
-            linearLayout1.addView(scrollView);
-        }
+        // specify an adapter (see also next example)
+        mAdapter = new TierListeAdapter(tiersListeList, MesListesActivity.this);
+        recyclerView.setAdapter(mAdapter);
 
 
+
+    }
+
+    public void vers_tierListe(TiersListe tiersListe, int position) {
+        Intent intent = new Intent(this, TierListeActivity.class);
+        intent.putExtra("mPopularList", tiersListe.getBase());
+        intent.putExtra("tierF", tiersListe.getTierF());
+        intent.putExtra("tierS", tiersListe.getTierS());
+        intent.putExtra("tiersListeList", tiersListeList);
+        intent.putExtra("titre", tiersListe.getTitre());
+        startActivity(intent);
     }
 }

@@ -85,10 +85,6 @@ public class MainActivity extends AppCompatActivity {
     public void mesTierListes(View view){
         Intent intent = new Intent(this, MesListesActivity.class);
         intent.putExtra("tiersListeList", tiersListeList);
-        Log.v("MAIN ACTIVITY","olala");
-        for(TiersListe elem : tiersListeList){
-            Log.v("MAIN ACTIVITY",elem.getTitre());
-        }
         startActivity(intent);
     }
 
