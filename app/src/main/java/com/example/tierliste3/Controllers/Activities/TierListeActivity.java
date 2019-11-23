@@ -1,6 +1,7 @@
 package com.example.tierliste3.Controllers.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -10,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -30,9 +32,10 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 
-public class TierListeActivity extends AppCompatActivity {
+// Affiche la tier liste selectionné avec pour chaque tier une Scroll view
+// Cette classe est pas du tout propre j'aurais du faire une fonction qui génere la scrollView, mais je fait que des copier coller pour crée une nouvelle scrollView
 
-    private final String url_img = "https://image.tmdb.org/t/p/w185";
+public class TierListeActivity extends AppCompatActivity {
 
     ArrayList<Film> mPopularList;
     ArrayList<Film> tierS;
@@ -65,7 +68,7 @@ public class TierListeActivity extends AppCompatActivity {
         tierA = (ArrayList<Film>) intent.getSerializableExtra("tierA");
         tierB = (ArrayList<Film>) intent.getSerializableExtra("tierB");
         tierC = (ArrayList<Film>) intent.getSerializableExtra("tierC");
-        tiersListeList = ( ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList") ;
+        tiersListeList = ( ArrayList<TiersListe>) intent.getSerializableExtra("tiersListeList");
         titre = (String) intent.getSerializableExtra("titre");
 
         setTitle(titre);
@@ -118,13 +121,16 @@ public class TierListeActivity extends AppCompatActivity {
         linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         linearLayout_2.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout_2.setLayoutParams(linearParams);
-        linearLayout_2.setBackgroundColor(Color.YELLOW);
+        linearLayout_2.setBackgroundColor(Color.GRAY);
         scrollView_2.addView(linearLayout_2);
         scrollView_2.setFillViewport(true);
 
-
         button = new Button(this);
-        button.setText("Ajouter");
+        button.setText("S");
+        button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setTextSize(20);
+        button.setTextColor(Color.WHITE);
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.tiershap));
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -156,6 +162,20 @@ public class TierListeActivity extends AppCompatActivity {
                     if(selectedTier == "tierF"){
                         tierF.remove(selectedFilm);
 
+                    }
+                    if(selectedTier == "tierA"){
+                        tierA.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierB"){
+                        tierB.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierC"){
+                        tierC.remove(selectedFilm);
+                    }
+                    if(selectedTier == "mPopularList"){
+                        mPopularList.remove(selectedFilm);
                     }
                     tierS.add(selectedFilm);
                     selectedLinearLayout.removeView(selectedView);
@@ -193,7 +213,311 @@ public class TierListeActivity extends AppCompatActivity {
             linearLayout1.addView(scrollView_2);
         }
 
+        //-------------------
+        // TIER A SCROLL VIEW
+        scrollView_2 = new HorizontalScrollView(this);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        scrollView_2.setLayoutParams(layoutParams);
 
+        final LinearLayout linearLayout_4 = new LinearLayout(this);
+        linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayout_4.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout_4.setLayoutParams(linearParams);
+        linearLayout_4.setBackgroundColor(Color.WHITE);
+        scrollView_2.addView(linearLayout_4);
+        scrollView_2.setFillViewport(true);
+
+
+        button = new Button(this);
+        button.setText("A");
+        button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setTextSize(20);
+        button.setTextColor(Color.WHITE);
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.tiershap));
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(selectedFilm != null){
+                    Button newButton = new Button(getApplicationContext());
+                    newButton.setText(selectedFilm.getOriginalTitle());
+                    newButton.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            for(Film film : tierA){
+                                if(film.getOriginalTitle() == ((Button)v).getText() ){
+                                    selectedFilm = film;
+                                    break;
+                                }
+                            }
+                            selectedLinearLayout = linearLayout_4;
+                            selectedView = v;
+                            selectedTier = "tierA";
+
+                        }
+                    });
+                    if(selectedTier == "tierS"){
+                        tierS.remove(selectedFilm);
+                    }
+                    if(selectedTier == "tierF"){
+                        tierF.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierA"){
+                        tierA.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierB"){
+                        tierB.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierC"){
+                        tierC.remove(selectedFilm);
+                    }
+                    if(selectedTier == "mPopularList"){
+                        mPopularList.remove(selectedFilm);
+                    }
+                    tierA.add(selectedFilm);
+                    selectedLinearLayout.removeView(selectedView);
+                    linearLayout_4.addView(newButton);
+                    selectedFilm = null;
+                    selectedLinearLayout = null;
+                    selectedView = null;
+                }
+            }
+        });
+        linearLayout_4.addView(button);
+
+        for(Film film : tierA){
+            button = new Button(this);
+            button.setText(film.getOriginalTitle());
+            button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    selectedFilm = film;
+                    selectedLinearLayout = linearLayout_4;
+                    selectedView = v;
+                    selectedTier = "tierA";
+
+                }
+            });
+            linearLayout_4.addView(button);
+        }
+
+        if (linearLayout1 != null) {
+            linearLayout1.addView(scrollView_2);
+        }
+        //-------------------
+        // TIER B SCROLL VIEW
+        scrollView_2 = new HorizontalScrollView(this);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        scrollView_2.setLayoutParams(layoutParams);
+
+        final LinearLayout linearLayout_5 = new LinearLayout(this);
+        linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayout_5.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout_5.setLayoutParams(linearParams);
+        linearLayout_5.setBackgroundColor(Color.GRAY);
+        scrollView_2.addView(linearLayout_5);
+        scrollView_2.setFillViewport(true);
+
+
+
+        button = new Button(this);
+        button.setText("B");
+        button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setTextSize(20);
+        button.setTextColor(Color.WHITE);
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.tiershap));
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(selectedFilm != null){
+                    Button newButton = new Button(getApplicationContext());
+                    newButton.setText(selectedFilm.getOriginalTitle());
+                    newButton.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            for(Film film : tierB){
+                                if(film.getOriginalTitle() == ((Button)v).getText() ){
+                                    selectedFilm = film;
+                                    break;
+                                }
+                            }
+                            selectedLinearLayout = linearLayout_5;
+                            selectedView = v;
+                            selectedTier = "tierB";
+
+                        }
+                    });
+                    if(selectedTier == "tierS"){
+                        tierS.remove(selectedFilm);
+                    }
+                    if(selectedTier == "tierF"){
+                        tierF.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierA"){
+                        tierA.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierB"){
+                        tierB.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierC"){
+                        tierC.remove(selectedFilm);
+                    }
+                    if(selectedTier == "mPopularList"){
+                        mPopularList.remove(selectedFilm);
+                    }
+                    tierB.add(selectedFilm);
+                    selectedLinearLayout.removeView(selectedView);
+                    linearLayout_5.addView(newButton);
+                    selectedFilm = null;
+                    selectedLinearLayout = null;
+                    selectedView = null;
+                }
+            }
+        });
+        linearLayout_5.addView(button);
+
+        for(Film film : tierB){
+            button = new Button(this);
+            button.setText(film.getOriginalTitle());
+            button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    selectedFilm = film;
+                    selectedLinearLayout = linearLayout_5;
+                    selectedView = v;
+                    selectedTier = "tierB";
+
+                }
+            });
+            linearLayout_5.addView(button);
+        }
+
+        if (linearLayout1 != null) {
+            linearLayout1.addView(scrollView_2);
+        }
+
+
+        //-------------------
+        // TIER C SCROLL VIEW
+        scrollView_2 = new HorizontalScrollView(this);
+        layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        scrollView_2.setLayoutParams(layoutParams);
+
+        final LinearLayout linearLayout_6 = new LinearLayout(this);
+        linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayout_6.setOrientation(LinearLayout.HORIZONTAL);
+        linearLayout_6.setLayoutParams(linearParams);
+        linearLayout_6.setBackgroundColor(Color.WHITE);
+        scrollView_2.addView(linearLayout_6);
+        scrollView_2.setFillViewport(true);
+
+
+        button = new Button(this);
+        button.setText("C");
+        button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setTextSize(20);
+        button.setTextColor(Color.WHITE);
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.tiershap));
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                if(selectedFilm != null){
+                    Button newButton = new Button(getApplicationContext());
+                    newButton.setText(selectedFilm.getOriginalTitle());
+                    newButton.setOnClickListener(new View.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(View v)
+                        {
+                            for(Film film : tierC){
+                                if(film.getOriginalTitle() == ((Button)v).getText() ){
+                                    selectedFilm = film;
+                                    break;
+                                }
+                            }
+                            selectedLinearLayout = linearLayout_6;
+                            selectedView = v;
+                            selectedTier = "tierC";
+
+                        }
+                    });
+                    if(selectedTier == "tierS"){
+                        tierS.remove(selectedFilm);
+                    }
+                    if(selectedTier == "tierF"){
+                        tierF.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierA"){
+                        tierA.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierB"){
+                        tierB.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierC"){
+                        tierC.remove(selectedFilm);
+                    }
+                    if(selectedTier == "mPopularList"){
+                        mPopularList.remove(selectedFilm);
+                    }
+                    tierC.add(selectedFilm);
+                    selectedLinearLayout.removeView(selectedView);
+                    linearLayout_6.addView(newButton);
+                    selectedFilm = null;
+                    selectedLinearLayout = null;
+                    selectedView = null;
+                }
+            }
+        });
+        linearLayout_6.addView(button);
+
+        for(Film film : tierC){
+            button = new Button(this);
+            button.setText(film.getOriginalTitle());
+            button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+            button.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    selectedFilm = film;
+                    selectedLinearLayout = linearLayout_6;
+                    selectedView = v;
+                    selectedTier = "tierC";
+
+                }
+            });
+            linearLayout_6.addView(button);
+        }
+
+        if (linearLayout1 != null) {
+            linearLayout1.addView(scrollView_2);
+        }
+
+        //-------------------
         // TIER F SCROLL VIEW
         scrollView_2 = new HorizontalScrollView(this);
         layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -203,13 +527,17 @@ public class TierListeActivity extends AppCompatActivity {
         linearParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         linearLayout_3.setOrientation(LinearLayout.HORIZONTAL);
         linearLayout_3.setLayoutParams(linearParams);
-        linearLayout_3.setBackgroundColor(Color.RED);
+        linearLayout_3.setBackgroundColor(Color.GRAY);
         scrollView_2.addView(linearLayout_3);
         scrollView_2.setFillViewport(true);
 
 
         button = new Button(this);
-        button.setText("Ajouter");
+        button.setText("F");
+        button.setWidth(ViewGroup.LayoutParams.WRAP_CONTENT);
+        button.setTextSize(20);
+        button.setTextColor(Color.WHITE);
+        button.setBackground(ContextCompat.getDrawable(this, R.drawable.tiershap));
         button.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -242,6 +570,20 @@ public class TierListeActivity extends AppCompatActivity {
                         tierF.remove(selectedFilm);
 
                     }
+                    if(selectedTier == "tierA"){
+                        tierA.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierB"){
+                        tierB.remove(selectedFilm);
+
+                    }
+                    if(selectedTier == "tierC"){
+                        tierC.remove(selectedFilm);
+                    }
+                    if(selectedTier == "mPopularList"){
+                        mPopularList.remove(selectedFilm);
+                    }
                     tierF.add(selectedFilm);
                     selectedLinearLayout.removeView(selectedView);
                     linearLayout_3.addView(newButton);
@@ -265,7 +607,7 @@ public class TierListeActivity extends AppCompatActivity {
                     selectedFilm = film;
                     selectedLinearLayout = linearLayout_3;
                     selectedView = v;
-                    selectedTier = "tierS";
+                    selectedTier = "tierF";
 
                 }
             });
@@ -277,10 +619,14 @@ public class TierListeActivity extends AppCompatActivity {
         }
 
 
-    }
 
+
+
+    }
+    private void ajouterScrollView(){ // A faire pour remplacer les copier coller dégeulasse
+    }
     public void sauvegardeTierListe(View view) {
-        TiersListe tierListe = new TiersListe(titre,mPopularList,tierS,tierF);
+        TiersListe tierListe = new TiersListe(titre,mPopularList,tierS,tierF,tierA,tierB,tierC);
         if(tiersListeList == null){
             tiersListeList = new ArrayList<TiersListe>();
         }

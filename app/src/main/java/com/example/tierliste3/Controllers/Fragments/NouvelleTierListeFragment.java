@@ -56,6 +56,9 @@ public class NouvelleTierListeFragment extends Fragment {
                     intent.putExtra("mPopularList", activity.getmPopularList());
                     intent.putExtra("tierF", new ArrayList<Film>());
                     intent.putExtra("tierS", new ArrayList<Film>());
+                    intent.putExtra("tierA", new ArrayList<Film>());
+                    intent.putExtra("tierB", new ArrayList<Film>());
+                    intent.putExtra("tierC", new ArrayList<Film>());
                     intent.putExtra("titre", titre);
                     intent.putExtra("activity","NouvelleTierListe");
                     intent.putExtra("tiersListeList",activity.getTiersListeList());

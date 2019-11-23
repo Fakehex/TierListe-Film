@@ -14,11 +14,14 @@ public class TiersListe implements Serializable {
     private ArrayList<Film> tierC;
     private ArrayList<Film> tierF;
 
-    public TiersListe(String titre,ArrayList<Film> base,ArrayList<Film> tierS, ArrayList<Film> tierF){
+    public TiersListe(String titre,ArrayList<Film> base,ArrayList<Film> tierS, ArrayList<Film> tierF,ArrayList<Film> tierA,ArrayList<Film> tierB, ArrayList<Film> tierC){
         this.titre = titre;
         this.base = base;
         this.tierS = tierS;
         this.tierF = tierF;
+        this.tierA = tierA;
+        this.tierB = tierB;
+        this.tierC = tierC;
     }
     public ArrayList<Film> getBase() {
         return base;

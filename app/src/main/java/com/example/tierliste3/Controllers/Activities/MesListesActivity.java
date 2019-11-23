@@ -59,6 +59,9 @@ public class MesListesActivity extends AppCompatActivity implements TierListeAda
         intent.putExtra("mPopularList", tiersListe.getBase());
         intent.putExtra("tierF", tiersListe.getTierF());
         intent.putExtra("tierS", tiersListe.getTierS());
+        intent.putExtra("tierA", tiersListe.getTierA());
+        intent.putExtra("tierB", tiersListe.getTierB());
+        intent.putExtra("tierC", tiersListe.getTierC());
         intent.putExtra("tiersListeList", tiersListeList);
         intent.putExtra("titre", tiersListe.getTitre());
         startActivity(intent);
